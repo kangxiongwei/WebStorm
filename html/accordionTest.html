@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴测试</title>
+    <script type="text/javascript" src="../resources/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../js/jquery.cms.core.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#myaccordion").myaccordion();
+        });
+    </script>
+</head>
+<body>
+    <div id="myaccordion">
+        <ul class="navMenu navSelected">
+            <h3 class="navTitle">
+                <span class="navTilteTxt">用户管理</span>
+            </h3>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/user/users" target="content">用户信息管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/group/groups" target="content">用户组管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/role/roles" target="content">用户角色管理</a>
+            </li>
+        </ul>
+
+        <ul class="navMenu navSelected">
+            <h3 class="navTitle">
+                <span class="navTilteTxt">文章管理</span>
+            </h3>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/channel/cm" target="content">栏目信息管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/article/publishs" target="content">文章信息管理</a>
+            </li>
+        </ul>
+        <ul class="navMenu">
+            <h3 class="navTitle">
+                <span class="navTilteTxt">系统配置</span>
+            </h3>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/hyperlink/hyperlinks" target="content">超级链接管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/webInfo/showWebInfo" target="content">网站信息管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/newImgManage/newImgManage" target="content">首页图片管理</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/backup/sqls" target="content">网站数据备份</a>
+            </li>
+            <li class="navChild">
+                <a href="<%=request.getContextPath() %>/admin/systemClean/articleList" target="content">系统清理管理</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

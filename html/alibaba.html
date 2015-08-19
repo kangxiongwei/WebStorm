@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>笔试题</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #main {
+            width: 100%;
+            height: 300px;
+        }
+        #main div#slide_left {
+            width: 100px;
+            height: 300px;
+            background: pink;
+            position: absolute;
+            left: 0;
+        }
+        #main div#slide_center {
+            margin-right: 100px;
+            height: 300px;
+            background: green;
+        }
+        #main div#slide_right {
+            width: 100px;
+            height: 300px;
+            background: pink;
+            position: absolute;
+            right: 0;
+        }
+
+        table,td,tr {
+            border-spacing: 0px;
+        }
+        #main_table {
+            width: 100%;
+            height: 300px;
+            margin-top: 5px;
+        }
+        #main_table td {
+            padding: 0;
+        }
+        #main_table td#left,td#right {
+            width: 100px;
+            height: 100%;
+            background: pink;
+        }
+        #main_table td#center {
+            background: green;
+        }
+    </style>
+    <script type="text/javascript">
+        //item1
+        var a = 0;
+        function A(){
+            this.a = 1;
+            setTimeout(function(){
+                this.a = 2;
+                try{
+                    this.b="b";
+                    throw '';
+                }
+                catch(e){
+                    this.b='bb';
+                }
+            },0);
+            this.b="bbb";
+        }
+
+        var aa = new A();
+
+        setTimeout(function(){
+            console.log(aa.a);  //1
+            console.log(window.a); //2
+            console.log(aa.b); //bbb
+            console.log(window.b); //bb
+        },0);
+
+        //item2
+        x=1;
+        if(x===true){
+            console.log("Yes");
+        }
+        else{
+            console.log("No");
+        }
+
+
+        function foo(foo){
+            foo = foo || 1;
+            console.log("foo: "+foo);
+        }
+        foo(2);
+
+        //item3
+        var obj = {
+            '1':'a',
+            '2':'b',
+            'length':2,
+            push:Array.prototype.push
+        };
+        obj.push('c');
+        console.log("length: "+obj.length);
+    </script>
+</head>
+<body>
+
+    <a id="kxw_a" href="#">点我</a>
+
+
+    <div id="main">
+        <div id="slide_left"></div>
+        <div id="slide_center"></div>
+        <div id="slide_right"></div>
+    </div>
+    <table id="main_table">
+        <tr>
+            <td id="left"></td>
+            <td id="center"></td>
+            <td id="right"></td>
+        </tr>
+    </table>
+
+
+
+    <script type="text/javascript">
+        //item4
+        var handler = function(){
+            alert("用户名不能为空");
+        };
+        function handle_click(){
+            var a = document.getElementById("kxw_a");
+            /*var event = event||window.event;
+            a.onclick = function(event){
+                alert(typeof event);
+                alert("用户名不能为空");
+            }*/
+            if (window.addEventListener){
+                a.addEventListener("click",handler,false);
+            }
+            else if(window.attachEvent){
+                a.attachEvent("onclick",handler);
+            }
+            else{
+                a["onclick"]=handler;
+            }
+        }
+        handle_click();
+    </script>
+</body>
+</html>

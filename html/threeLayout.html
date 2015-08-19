@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>三段式自适应布局</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#main {
+			border: 1px solid red;
+		}
+		#header {
+			height: 120px;
+			background: #0092DC;
+		}
+		#content #left_slide{
+			width: 200px;
+			height: 300px;
+			background: #00ee00;
+			float: left;
+		}
+		#content #center {
+			height: 300px;
+			margin-right: 200px;
+			margin-left: 200px;
+			background: yellow;
+		}
+		#content #right_slide {
+			width: 200px;
+			height: 300px;
+			background: #00ee00;
+			float: right;
+		}
+		#footer {
+			height: 80px;
+			background: #2984a4;
+		}
+	</style>
+</head>
+<body>
+<div id="main">
+	<div id="header"></div>
+	<div id="content">
+		<div id="left_slide"></div>
+		<div id="right_slide"></div>
+		<div id="center"></div>
+	</div>
+	<div id="footer"></div>
+</div>
+</body>
+</html>

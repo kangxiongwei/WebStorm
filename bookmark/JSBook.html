@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS笔记</title>
+    <script type="text/javascript">
+        //从字符串中找出字符最多的元素及统计次数
+        function mostCharInString(str){
+            var model = {};
+            var mostKey = "";
+            var mostValue = 0;
+            for(var i=0; i<str.length; i++){
+                var cur = str[i];
+                var flag = false;
+                for(var key in model){
+                    if(key == cur){
+                        flag = true;
+                        if(model[cur] > mostValue) {
+                            mostKey = cur;
+                            mostValue = model[cur];
+                        }
+                    }
+                }
+                model[cur] = flag?(model[cur]+1):1;
+            }
+            var result = JSON.stringify(model);
+            console.log(result+",mostKey:"+mostKey+",mostValue:"+model[mostKey]);
+            return model;
+        }
+
+        mostCharInString("kangxiongwei");
+
+
+        function array_push_test(){
+            var obj = {
+                '1':'a',
+                '2':'b',
+                '3':'s',
+                'length':3,
+                push:Array.prototype.push
+            };
+            obj.push('c');
+            console.log(obj);
+        }
+        array_push_test();
+
+    </script>
+</head>
+<body>
+
+<section title="setTimeout笔记">
+    setTimeout()的作用域是全局对象，在浏览器中，即为 window<br>
+    所以，其中的变量可以用window.变量名取出
+</section>
+<section>
+    Array.prototype.push的使用：<br>
+    //源码：
+    function ObservedArrayPush() {
+        var n = TO_UINT32(this.length);
+        var m = %_ArgumentsLength();
+
+        try {
+            BeginPerformSplice(this);
+            for (var i = 0; i < m; i++) {
+            this[i+n] = %_Arguments(i);
+            }
+            var new_length = n + m;
+            this.length = new_length;
+        } finally {
+            EndPerformSplice(this);
+            EnqueueSpliceRecord(this, n, [], m);
+        }
+
+        return new_length;
+    }
+
+    // Appends the arguments to the end of the array and returns the new
+    // length of the array. See ECMA-262, section 15.4.4.7.
+    function ArrayPush() {
+        CHECK_OBJECT_COERCIBLE(this, "Array.prototype.push");
+
+        if (%IsObserved(this))
+        return ObservedArrayPush.apply(this, arguments);
+
+        var array = TO_OBJECT_INLINE(this);
+        var n = TO_UINT32(array.length);
+        var m = %_ArgumentsLength();
+
+        for (var i = 0; i < m; i++) {
+            array[i+n] = %_Arguments(i);
+        }
+
+        var new_length = n + m;
+        array.length = new_length;
+        return new_length;
+    }
+</section>
+
+
+</body>
+</html>

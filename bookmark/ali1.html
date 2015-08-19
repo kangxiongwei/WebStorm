@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<div class='mod-spm' data-spmid='123'>
+		<div class='child_a'></div>
+		<div class='child_b'></div>
+		<div class='child_c'></div>
+		<div class='child_d'></div>
+	</div>
+	<div class='mod-spm' data-spmid='456'>
+		<div class='child_a'></div>
+		<div class='child_b'></div>
+		<div class='child_c'></div>
+		<div class='child_d'></div>
+	</div>
+	<div class='mod-spm' data-spmid='789'>
+		<div class='child_a'></div>
+		<div class='child_b'></div>
+		<div class='child_c'></div>
+		<div class='child_d'></div>
+	</div>
+
+	<script type="text/javascript">
+		/**
+		 * 有dom结构如上,请用原生代码（禁用jQuery作答）实现以下功能： 
+		 * (a)计算鼠标在mod-spm区域内的停留时长，data-spmid不同视为不同区域 
+		 * (b)尽量减少性能损耗 
+		 * (c)重复进入计时累加
+		 */
+		function showInfo(ele,name,total){
+			ele.innerHTML = "元素"+name+"上总停留时间为："+total+"ms";
+		}
+		function showTime(){
+			var regions = document.getElementsByClassName("mod-spm");
+			//继承该类
+			Array.prototype.forEach.call(regions,function(element){
+				var info = document.createElement("div");
+				var totalTime = 0;
+				var moveTime = 0;
+				var currentEle = element.getAttribute("data-spmid");
+				showInfo(element,currentEle,totalTime);
+				element.appendChild(info);
+				element.onmouseover = function(event){
+					moveTime = new Date();
+				};
+				element.onmouseout = function(event){
+					totalTime += new Date().getTime()-moveTime.getTime();
+					showInfo(element,currentEle,totalTime);
+				}
+			});
+		}
+		showTime();
+	</script>
+</body>
+</html>

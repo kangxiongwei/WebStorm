@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>存储</title>
+	<script type="text/javascript">
+		//session存储，当浏览器关闭后，存储的值消失
+		function sessionTest() {
+			if (sessionStorage.pagecount) {
+				sessionStorage.pagecount=Number(sessionStorage.pagecount) +1;
+			}
+			else {
+				sessionStorage.pagecount=1;
+			}
+			document.write("Visits "+sessionStorage.pagecount+" time(s) this session.");
+		}
+		sessionTest();
+		//本地存储会一直保存，不受时间限制
+		function localTest() {
+			if (localStorage.pagecount) {
+				localStorage.pagecount=Number(localStorage.pagecount) +1;
+			}
+			else {
+				localStorage.pagecount=1;
+			}
+			document.write("<br/>Visits "+localStorage.pagecount+" time(s) this local.");
+		}
+		localTest();
+	</script>
+</head>
+<body>
+
+</body>
+</html>

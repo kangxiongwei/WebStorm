@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>测试浮动</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #main {
+            width: 1200px;
+            border: 1px solid blue;
+            margin: 0 auto;
+        }
+        #header {
+            height: 120px;
+            background: pink;
+        }
+        #content {
+            height: 800px;
+            background: yellow;
+        }
+        #content div#slideLeft {
+            width: 30%;
+            height: 100%;
+            border-right: 1px solid grey;
+            float: left;
+        }
+        #content div#slideCenter {
+            float: left;
+        }
+        #content div#slideRight {
+            width: 30%;
+            height: 100%;
+            border-left: 1px solid grey;
+            float: right;
+        }
+        #foot {
+            height: 120px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="header"></div>
+    <div id="content">
+        <div id="slideLeft"></div>
+        <div id="slideCenter"></div>
+        <div id="slideRight"></div>
+    </div>
+    <div id="foot"></div>
+</div>
+</body>
+</html>
