@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>事件绑定</title>
+	<script type="text/javascript">
+		function save() {
+			alert("save invoked");
+		}
+		/**
+		 * 给某个元素绑定事件
+		 * @param element：Dom元素
+		 * @param type: 事件类型
+		 * @param fun: 回调函数，当事件触发时执行该函数
+		 */
+		function bindEventForElement(element,type,fun){
+			if(element.addEventListener) {
+				//Firefox Chrome Opera IE9+...
+				element.addEventListener(type,fun,false);
+			} else if(element.attachEvent) {
+				//IE5 IE6
+				element.attachEvent("on"+type,fun);
+			} else {
+				element["on"+type] = fun;
+			}
+		}
+
+
+		function bindEvent(){
+			var saveBtn = document.getElementById("saveBtn");
+			bindEventForElement(saveBtn,"click",save);
+		}
+		window.onload = function() {
+			bindEvent();
+		}
+	</script>
+</head>
+<body>
+	<button id="saveBtn">确定</button>
+</body>
+</html>
