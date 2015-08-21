@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>测试JS</title>
+	<script type="text/javascript" src="extendsUtil.js"></script>
+	<script type="text/javascript">
+		function Parent(username){
+			this.username = username;
+		}
+		Parent.prototype = {
+			constructor:Parent,
+			say: function() {
+				alert(this.username);
+			}
+		};
+		function Child(username,password){
+			//Child中有个superClass的属性，指向了父类的prototype
+			//而父类的prototype中有个constructor属性，指向了自己的构造方法，通过这个构造方法可以继承属性
+			//这种方式避免修改父类的名称时需要修改子类
+			Child.superClass.constructor.call(this,username);
+			this.password = password;
+		}
+		//实现继承
+		ExtendsUtils.extend(Child,Parent);
+		Child.prototype.hello = function(){
+			alert(this.password);
+		};
+		var p = new Parent("parent");
+		var c = new Child("child","sdsd");
+		p.say();
+		c.say();
+		c.hello();
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

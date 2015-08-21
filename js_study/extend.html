@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>JavaScript继承的几种方式</title>
+	<script type="text/javascript">
+		//第一种：对象冒充
+		function Parent(username) {
+			this.username = username;
+			this.sayHello = function() {
+				alert("current name is: "+this.username);
+			}
+		}
+		function Child(username,password) {
+			//关键代码
+			this.method = Parent;
+			this.method(username);
+			delete this.method;
+
+			this.password = password;
+			this.sayWorld = function() {
+				alert("child password is: "+this.password);
+			}
+		}
+
+		var parent = new Parent("kangxiongwei");
+		var child = new Child("zhangsan","password");
+
+		//parent.sayHello(); //kangxiongwei
+
+		//child.sayHello(); //zhangsan
+		//child.sayWorld(); //password
+
+		//第二种：call方法
+		function CallChild(username,password) {
+			Parent.call(this,username);
+			this.password = password;
+
+			this.sayWorld = function() {
+				alert("call child password is: "+this.password);
+			}
+		}
+
+		var callChild = new CallChild("zhangsan","123");
+		/*callChild.sayHello();
+		callChild.sayWorld();*/
+
+		//第三种：apply方法
+		function ApplyChild(username,password) {
+
+			Parent.apply(this,new Array(username));
+			this.password = password;
+
+			this.sayWorld = function() {
+				alert("apply child password is: "+this.password);
+			}
+		}
+		var applyChild = new ApplyChild("lisi","234");
+		/*applyChild.sayHello();
+		applyChild.sayWorld();*/
+
+		//第四种：原型链方式（无法给构造函数传参数）
+		function ChainParent() {
+
+		}
+		ChainParent.prototype.username = "zhangsan";
+		ChainParent.prototype.sayHello = function(){
+			alert(this.username);
+		};
+		function ChainChild() {
+
+		}
+		ChainChild.prototype = new ChainParent();
+		ChainChild.prototype.password = "lisipassword";
+		ChainChild.prototype.sayWorld = function(){
+			alert(this.password);
+		};
+		/*var cc = new ChainChild();
+		cc.sayHello();
+		cc.sayWorld();*/
+
+		//第五种：组合方式
+		function CombParent(username) {
+			this.username = username;
+		}
+		CombParent.prototype.sayHello = function(){
+			alert("comb parent username is: "+this.username);
+		};
+		function CombChild(username,password){
+			CombParent.call(this,username);
+			this.password = password;
+		}
+		CombChild.prototype = new CombParent();
+		CombChild.prototype.sayWorld = function(){
+			alert("comb child password is: "+this.password);
+		};
+		var cp = new CombParent("zhangsan");
+		var combchild = new CombChild("lisi","sdfsd");
+		cp.sayHello();
+		combchild.sayHello();
+		combchild.sayWorld();
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
