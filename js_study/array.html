@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>JS Array</title>
+	<script type="text/javascript">
+		var array = new Array();
+		array[0] = "kxw";
+		array[1] = "kjw";
+		array[2] = "klf";
+		array[3] = "kxf";
+		array[4] = "ksm";
+		/**
+		 * 1、arrayObject.join(separator)
+		 * 返回一个字符串。该字符串是通过把 arrayObject 中的每个元素转换为字符串，然后把这些字符串连接起来，
+		 * 在两个元素之间插入 separator 字符串而生成的。
+		 */
+		var joinResult = array.join("->");
+		console.log(joinResult);
+		/**
+		 * 2、arrayObject.slice(start,end)
+		 * 返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+		 * start必须，end可选
+		 */
+		var sliceArray = array.slice(2,4);
+		console.log(sliceArray);
+		/**
+		 * 3、arrayObject.splice(index,howmany,item1,.....,itemX)
+		 * splice() 方法可删除从 index 处开始的零个或多个元素，
+		 * 并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
+		 * 如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。
+		 *
+		 */
+		console.log(array);
+		var spliceArray = array.splice(2,2,"kff");
+		//结果：array = ["kxw","kjw","kff","ksm"]
+		//spliceArray = ["klf","kxf"]
+		console.log(array);//数组下标为2开始，两个数组元素删除，并插入"kff"
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
