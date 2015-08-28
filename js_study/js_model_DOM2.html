@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>JS的DOM2模型事件处理</title>
+	<script type="text/javascript" src="../resources/jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var all = $("*");
+			$.each(all,function(){
+				var rel = this;
+
+				//第三个参数为false进行事件捕获
+				/*this.addEventListener("click",function(event){
+					printEvent(event,this);
+				},false);*/
+
+				//第三个参数为true时进行事件冒泡
+				/*this.addEventListener("click",function(event){
+					printEvent(event,this);
+				},true);*/
+
+				//对于IE而言，不支持addEventListener，需要用attachEvent实现，但是不支持第三个参数
+				this.attachEvent("onclick",function(event){
+					printEvent(event,this);
+				});
+
+			});
+			var printEvent = function(event,obj){
+				event = event?event:window.event;
+				//target表示事件源，永远是被点击的元素，事件对象会发生冒泡
+				var target = event.target?event.target:event.srcElement;
+				print("事件源："+target.tagName+",源ID："+target.id+",事件对象："+obj.tagName+"，对象ID："+obj.id);
+			};
+			function print(txt){
+				$("#content").append(txt+"<br/>");
+			}
+		});
+	</script>
+</head>
+<body>
+
+	<div id="parent">
+		<div id="child">
+			点击我
+		</div>
+	</div>
+
+	<div id="content">
+
+	</div>
+
+</body>
+</html>

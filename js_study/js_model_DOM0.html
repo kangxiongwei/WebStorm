@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>JS的DOM0模型事件处理</title>
+	<script type="text/javascript" src="../resources/jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var all = $("*");
+			$.each(all,function(){
+				var rel = this;
+				this.onclick = function(event){
+					event = event?event:window.event;
+					//target表示事件源，永远是被点击的元素，事件对象会发生冒泡
+					var target = event.target?event.target:event.srcElement;
+					print("事件源："+target.tagName+",源ID："+target.id+",事件对象："+this.tagName+"，对象ID："+this.id);
+					//主流浏览器阻止事假冒泡
+					event.stopPropagation();
+					//IE阻止事件冒泡
+					event.cancelBubble = true;
+				};
+			});
+			function print(txt){
+				$("#content").append(txt+"<br/>");
+			}
+		});
+	</script>
+</head>
+<body>
+
+	<div id="parent">
+		<div id="child">
+			点击我
+		</div>
+	</div>
+
+	<div id="content">
+
+	</div>
+
+</body>
+</html>
